@@ -3,13 +3,10 @@
 	"apiVersion": 3,
 	"name": "just-related-posts/related-posts-template",
 	"version": "1.0.0",
-	"title": "Related Posts Template",
-	"category": "widgets",
+	"title": "Just Related Posts Template",
+	"category": "layout",
 	"icon": "grid-view",
-	"description": "Related posts query.",
-	"supports": {
-		"html": false
-	},
+	"description": "Related posts template.",
 	"textdomain": "just-related-posts",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

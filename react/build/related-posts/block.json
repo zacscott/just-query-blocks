@@ -4,14 +4,16 @@
   "name": "just-related-posts/related-posts",
   "version": "1.0.0",
   "title": "Just Related Posts",
-  "category": "widgets",
-  "icon": "repeat",
+  "category": "layout",
+  "icon": "controls-repeat",
   "description": "Related posts query.",
-  "supports": {
-    "html": false
-  },
   "textdomain": "just-related-posts",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "attributes": {
+    "related_by": {
+      "type": "string"
+    }
+  }
 }

@@ -140,7 +140,7 @@ module.exports = window["wp"]["element"];
   \***********************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-related-posts/related-posts-template","version":"1.0.0","title":"Related Posts Template","category":"widgets","icon":"grid-view","description":"Related posts query.","supports":{"html":false},"textdomain":"just-related-posts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-related-posts/related-posts-template","version":"1.0.0","title":"Just Related Posts Template","category":"layout","icon":"grid-view","description":"Related posts template.","textdomain":"just-related-posts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

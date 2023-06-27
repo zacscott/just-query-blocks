@@ -17,9 +17,11 @@ $current_query = null;
 
 function just_query_block_render_callback( $attributes, $content, $block ) {
 
+	$related_by = $attributes['related_by'] ?? '';
+
 	global $current_query;
 
-	// TODO wp_query stuff here.
+	// TODO fallback to generic posts if no results
 	$current_query = new WP_Query(
 		[
 		'post_type' => 'page',
@@ -65,9 +67,6 @@ function just_query_block_template_render_callback( $attributes, $content, $bloc
 	
 	if ( $current_query && $current_query->have_posts() ) :
 		$current_query->the_post();
-
-		global $post;
-		$the_post = $post;
 
 		$inner_blocks = $block->inner_blocks;
 		if ( $inner_blocks ) :
