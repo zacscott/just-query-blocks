@@ -1,16 +1,16 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "create-block/just-query-block",
-	"version": "0.1.0",
-	"title": "Just Query Block",
+	"name": "just-related-posts/related-posts-template",
+	"version": "1.0.0",
+	"title": "Related Posts Template",
 	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
+	"icon": "grid-view",
+	"description": "Related posts query.",
 	"supports": {
 		"html": false
 	},
-	"textdomain": "just-query-block",
+	"textdomain": "just-related-posts",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"

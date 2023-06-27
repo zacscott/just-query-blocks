@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "just-related-posts/related-posts",
+  "version": "1.0.0",
+  "title": "Just Related Posts",
+  "category": "widgets",
+  "icon": "repeat",
+  "description": "Related posts query.",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "just-related-posts",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

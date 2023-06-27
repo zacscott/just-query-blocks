@@ -1,4 +1,4 @@
 
-- Settings for all the WP Query parameters
-- Options to use the current page query
-- Setting to prevent duplicate posts on the page
+- Settings for related posts from the same category, tag, author
+- Add post template block
+- Refactor PHP code
