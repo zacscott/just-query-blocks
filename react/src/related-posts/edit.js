@@ -68,6 +68,7 @@ export default function edit( props ) {
 							options={ [
 								{ label: 'DESC', value: 'DESC' },
 								{ label: 'ASC', value: 'ASC' },
+								{ label: 'RAND', value: 'RAND' },
 							] }
 							onChange={ value => setAttributes( { order: value } ) }
 							__nextHasNoMarginBottom

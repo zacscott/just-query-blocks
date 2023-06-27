@@ -82,6 +82,9 @@ function edit(props) {
     }, {
       label: 'ASC',
       value: 'ASC'
+    }, {
+      label: 'RAND',
+      value: 'RAND'
     }],
     onChange: value => setAttributes({
       order: value
