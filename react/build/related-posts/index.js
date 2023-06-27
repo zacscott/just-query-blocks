@@ -77,13 +77,13 @@ function edit(props) {
     label: "Order",
     value: order,
     options: [{
-      label: 'DESC',
+      label: 'Descending',
       value: 'DESC'
     }, {
-      label: 'ASC',
+      label: 'Ascending',
       value: 'ASC'
     }, {
-      label: 'RAND',
+      label: 'Random',
       value: 'RAND'
     }],
     onChange: value => setAttributes({
