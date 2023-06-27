@@ -1,8 +1,7 @@
 
-- Settings for related posts from the same category, tag, author
+- Checkbox for include sticky posts
+- Guess posts per page?
 - __() everything in React pls
 - Exlcude the current post from the related posts
 - Backfill missing posts - exclude posts that are already displayed
-- Refactor PHP code
-- Clean up react code
 - Add patterns for related posts
