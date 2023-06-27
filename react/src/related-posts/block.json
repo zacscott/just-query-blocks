@@ -12,8 +12,12 @@
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"attributes": {
-		"related_by": {
+		"relatedBy": {
 			"type": "string"
+		},
+		"includeStickyPosts": {
+			"type": "boolean",
+			"default": true
 		}
 	}
 }

@@ -5,10 +5,10 @@ import './style.scss';
 
 import edit from './edit';
 import save from './save';
-import metadata from './block.json';
+import block from './block.json';
 
 registerBlockType(
-	metadata.name,
+	block.name,
 	{
 		edit,
 		save,

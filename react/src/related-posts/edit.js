@@ -12,20 +12,23 @@ import {
 import {
 	PanelBody,
 	PanelRow,
-	SelectControl
+	SelectControl,
+	ToggleControl,
 } from '@wordpress/components';
 
 import './editor.scss';
 
 export default function edit( props ) {
 	const {
-        attributes: { related_by },
+        attributes: { relatedBy, includeStickyPosts },
 		setAttributes
     } = props;
 
 	return (
 		<>
+
 			<InspectorControls>
+
 				<PanelBody
 					title={ __( 'Related By' ) }
 					initialOpen={true}
@@ -33,24 +36,41 @@ export default function edit( props ) {
 					<PanelRow>
 						<SelectControl
 							label="Related By"
-							value={ related_by }
+							value={ relatedBy }
 							options={ [
 								{ label: 'Category', value: 'category' },
 								{ label: 'Tag', value: 'tag' },
 								{ label: 'Author', value: 'author' },
 							] }
-							onChange={ value => setAttributes( { related_by: value } ) }
+							onChange={ value => setAttributes( { relatedBy: value } ) }
 							__nextHasNoMarginBottom
 						/>
 					</PanelRow>
+
+					<PanelRow>
+						<ToggleControl
+							label="Exclude Sticky Posts"
+							help={
+								includeStickyPosts
+									? 'Sticky posts excluded.'
+									: 'Sticky posts included.'
+							}
+							checked={ includeStickyPosts }
+							onChange={ value => { setAttributes( { includeStickyPosts: value } ) } }
+						/>
+					</PanelRow>
+
 				</PanelBody>
+
 			</InspectorControls>
+
 			<div { ...useBlockProps() }>
 				<InnerBlocks
 					templateLock={ false }
 					allowedBlocks={ '*' }
 				/>
 			</div>
+
 		</>
 	);
 }

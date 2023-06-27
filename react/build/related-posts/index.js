@@ -29,7 +29,8 @@ __webpack_require__.r(__webpack_exports__);
 function edit(props) {
   const {
     attributes: {
-      related_by
+      relatedBy,
+      includeStickyPosts
     },
     setAttributes
   } = props;
@@ -38,7 +39,7 @@ function edit(props) {
     initialOpen: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
     label: "Related By",
-    value: related_by,
+    value: relatedBy,
     options: [{
       label: 'Category',
       value: 'category'
@@ -50,9 +51,18 @@ function edit(props) {
       value: 'author'
     }],
     onChange: value => setAttributes({
-      related_by: value
+      relatedBy: value
     }),
     __nextHasNoMarginBottom: true
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: "Exclude Sticky Posts",
+    help: includeStickyPosts ? 'Sticky posts excluded.' : 'Sticky posts included.',
+    checked: includeStickyPosts,
+    onChange: value => {
+      setAttributes({
+        includeStickyPosts: value
+      });
+    }
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, {
@@ -104,13 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function save(props) {
-  const {
-    attributes: {
-      related_by
-    },
-    setAttributes
-  } = props;
+function save() {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
@@ -198,7 +202,7 @@ module.exports = window["wp"]["i18n"];
   \**************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-related-posts/related-posts","version":"1.0.0","title":"Just Related Posts","category":"layout","icon":"controls-repeat","description":"Related posts query.","textdomain":"just-related-posts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"related_by":{"type":"string"}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-related-posts/related-posts","version":"1.0.0","title":"Just Related Posts","category":"layout","icon":"controls-repeat","description":"Related posts query.","textdomain":"just-related-posts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"relatedBy":{"type":"string"},"includeStickyPosts":{"type":"boolean","default":true}}}');
 
 /***/ })
 
