@@ -20,7 +20,7 @@ import './editor.scss';
 
 export default function edit( props ) {
 	const {
-        attributes: { relatedBy, includeStickyPosts },
+        attributes: { relatedBy, orderBy, order, ignoreStickyPosts },
 		setAttributes
     } = props;
 
@@ -48,15 +48,37 @@ export default function edit( props ) {
 					</PanelRow>
 
 					<PanelRow>
+						<SelectControl
+							label="Order By"
+							value={ orderBy }
+							options={ [
+								{ label: 'Published Date', value: 'post_date' },
+								{ label: 'Modified Date', value: 'post_modified' },
+								{ label: 'Comment Count', value: 'comment_count' },
+							] }
+							onChange={ value => setAttributes( { orderBy: value } ) }
+							__nextHasNoMarginBottom
+						/>
+					</PanelRow>
+
+					<PanelRow>
+						<SelectControl
+							label="Order"
+							value={ order }
+							options={ [
+								{ label: 'DESC', value: 'DESC' },
+								{ label: 'ASC', value: 'ASC' },
+							] }
+							onChange={ value => setAttributes( { order: value } ) }
+							__nextHasNoMarginBottom
+						/>
+					</PanelRow>
+
+					<PanelRow>
 						<ToggleControl
-							label="Exclude Sticky Posts"
-							help={
-								includeStickyPosts
-									? 'Sticky posts excluded.'
-									: 'Sticky posts included.'
-							}
-							checked={ includeStickyPosts }
-							onChange={ value => { setAttributes( { includeStickyPosts: value } ) } }
+							label="Ignore sticky posts"
+							checked={ ignoreStickyPosts }
+							onChange={ value => { setAttributes( { ignoreStickyPosts: value } ) } }
 						/>
 					</PanelRow>
 

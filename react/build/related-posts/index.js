@@ -30,7 +30,9 @@ function edit(props) {
   const {
     attributes: {
       relatedBy,
-      includeStickyPosts
+      orderBy,
+      order,
+      ignoreStickyPosts
     },
     setAttributes
   } = props;
@@ -54,13 +56,43 @@ function edit(props) {
       relatedBy: value
     }),
     __nextHasNoMarginBottom: true
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: "Order By",
+    value: orderBy,
+    options: [{
+      label: 'Published Date',
+      value: 'post_date'
+    }, {
+      label: 'Modified Date',
+      value: 'post_modified'
+    }, {
+      label: 'Comment Count',
+      value: 'comment_count'
+    }],
+    onChange: value => setAttributes({
+      orderBy: value
+    }),
+    __nextHasNoMarginBottom: true
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: "Order",
+    value: order,
+    options: [{
+      label: 'DESC',
+      value: 'DESC'
+    }, {
+      label: 'ASC',
+      value: 'ASC'
+    }],
+    onChange: value => setAttributes({
+      order: value
+    }),
+    __nextHasNoMarginBottom: true
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    label: "Exclude Sticky Posts",
-    help: includeStickyPosts ? 'Sticky posts excluded.' : 'Sticky posts included.',
-    checked: includeStickyPosts,
+    label: "Ignore sticky posts",
+    checked: ignoreStickyPosts,
     onChange: value => {
       setAttributes({
-        includeStickyPosts: value
+        ignoreStickyPosts: value
       });
     }
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -202,7 +234,7 @@ module.exports = window["wp"]["i18n"];
   \**************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-related-posts/related-posts","version":"1.0.0","title":"Just Related Posts","category":"layout","icon":"controls-repeat","description":"Related posts query.","textdomain":"just-related-posts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"relatedBy":{"type":"string"},"includeStickyPosts":{"type":"boolean","default":true}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-related-posts/related-posts","version":"1.0.0","title":"Just Related Posts","category":"layout","icon":"controls-repeat","description":"Related posts query.","textdomain":"just-related-posts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"relatedBy":{"type":"string","default":"category"},"orderBy":{"type":"string","default":"post_date"},"order":{"type":"string","default":"DESC"},"ignoreStickyPosts":{"type":"boolean","default":false}}}');
 
 /***/ })
 

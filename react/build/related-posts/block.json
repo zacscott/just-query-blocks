@@ -13,11 +13,20 @@
   "style": "file:./style-index.css",
   "attributes": {
     "relatedBy": {
-      "type": "string"
+      "type": "string",
+      "default": "category"
     },
-    "includeStickyPosts": {
+    "orderBy": {
+      "type": "string",
+      "default": "post_date"
+    },
+    "order": {
+      "type": "string",
+      "default": "DESC"
+    },
+    "ignoreStickyPosts": {
       "type": "boolean",
-      "default": true
+      "default": false
     }
   }
 }

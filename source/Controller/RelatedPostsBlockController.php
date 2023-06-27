@@ -9,6 +9,9 @@ namespace JustRelatedPosts\Controller;
  */
 class RelatedPostsBlockController {
 
+    const RELATED_POSTS_BLOCK_NAME = 'just-related-posts/related-posts';
+    const RELATED_POSTS_TEMPLATE_BLOCK_NAME = 'just-related-posts/related-posts-template';
+
     /**
      * The current query being rendered.
      * 
@@ -42,7 +45,7 @@ class RelatedPostsBlockController {
 
     public function render_related_posts_block( $attributes, $content, $block ) {
 
-        $this->current_query = $this->get_related_posts_query( $attributes );
+        $this->current_query = $this->build_related_posts_query( $attributes, $content, $block );
 
         ob_start();
         
@@ -60,7 +63,7 @@ class RelatedPostsBlockController {
                     $inner_blocks->next();
     
                 }
-    
+
                 $inner_blocks->rewind();
     
             }
@@ -75,8 +78,6 @@ class RelatedPostsBlockController {
     }
 
     public function render_related_posts_template_block( $attributes, $content, $block ) {
-
-        $this->current_query = $this->get_related_posts_query( $attributes );
 
         ob_start();
 	
@@ -106,20 +107,28 @@ class RelatedPostsBlockController {
 
     }
 
-    protected function get_related_posts_query( $attributes ) {
+    protected function build_related_posts_query( $attributes, $content, $block ) {
 
-        $related_by = $attributes['related_by'] ?? '';
+        $related_by          = $query_args['relatedBy'] ?? 'category';
+        $order_by            = $query_args['orderBy'] ?? 'post_date';
+        $order               = $query_args['order'] ?? 'DESC';
+        $ignore_sticky_posts = $query_args['ignoreStickyPosts'] ?? false;
 
         // Build the query args based on the block attributes.
 
         $query_args = [
-            'post_type'      => 'post',      // TODO based on current post type.
-            'posts_per_page' => 3,           // TODO based on something.
-            'post_status'    => 'publish',
-            'orderby'        => 'post_date',
+            'post_status'         => 'publish',
+            'exclude'             => get_the_ID(),
+            'post_type'           => get_post_type( get_the_ID() ),
+            'posts_per_page'      => $this->count_post_templates( $block ),
+            'orderby'             => $order_by,
+            'order'               => $order,
+            'ignore_sticky_posts' => $ignore_sticky_posts,
         ];
 
         // TODO category, tag, author.
+
+        // TODO fallback query.
 
         /**
          * Filter the query arguments for the related posts block.
@@ -128,11 +137,46 @@ class RelatedPostsBlockController {
          */
         $query_args = apply_filters( 'just_related_posts_block_query_args', $query_args );
 
-        // TODO fallback query.
-
         $query = new \WP_Query( $query_args );
 
         return $query;
+
+    }
+
+    /**
+     * Count the number of post templates in the given blocks InnerBlocks.
+     * 
+     * @param WP_Block $block The block to count the post templates in.
+     * @return int The number of post templates in the block.
+     */
+    protected function count_post_templates( $block ) {
+
+        $count = 0;
+
+        $inner_blocks = $block->inner_blocks;
+        if ( $inner_blocks ) {
+
+            while ( $inner_blocks->valid() ) {
+
+                $current = $inner_blocks->current();
+
+                // If the current post is a post template, increment the count.
+                if ( $current->name === self::RELATED_POSTS_TEMPLATE_BLOCK_NAME ) {
+                    $count++;
+                }
+
+                // Recursively count the post templates in the current block.
+                $count += $this->count_post_templates( $current );
+
+                $inner_blocks->next();
+
+            }
+
+            $inner_blocks->rewind();
+
+        }
+
+        return $count;
 
     }
 

@@ -1,7 +1,4 @@
 
-- Checkbox for include sticky posts
-- Guess posts per page?
 - __() everything in React pls
-- Exlcude the current post from the related posts
 - Backfill missing posts - exclude posts that are already displayed
 - Add patterns for related posts
