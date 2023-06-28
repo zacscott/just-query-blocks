@@ -79,31 +79,28 @@ class RelatedPostsBlockController {
 
     public function render_related_posts_template_block( $attributes, $content, $block ) {
 
-        ob_start();
-	
+        $block_content = '';
+
         if ( $this->current_query && $this->current_query->have_posts() ) {
             $this->current_query->the_post();
+                    
 
-            $inner_blocks = $block->inner_blocks;
-            if ( $inner_blocks ) {
+            $dynamic_block_parsed = $block->parsed_block;
+            $dynamic_block_parsed['blockName'] = 'core/null';
 
-                while ( $inner_blocks->valid() ) {
+            $dynamic_block = new \WP_Block(
+                $dynamic_block_parsed,
+                [
+                    'postType' => get_post_type(),
+                    'postId'   => get_the_ID(),
+                ]
+            );
 
-                    $current = $inner_blocks->current();
-
-                    echo $current->render();
-
-                    $inner_blocks->next();
-
-                }
-
-                $inner_blocks->rewind();
-
-            }
+            $block_content = $dynamic_block->render( [ 'dynamic' => false ] );
 
         }
 
-        return ob_get_clean();
+        return $block_content;
 
     }
 
