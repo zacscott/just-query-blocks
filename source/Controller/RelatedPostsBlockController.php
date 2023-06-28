@@ -123,7 +123,6 @@ class RelatedPostsBlockController {
             'posts_per_page'      => $this->count_post_templates( $block ),
             'orderby'             => $order_by,
             'order'               => $order,
-            'ignore_sticky_posts' => $ignore_sticky_posts,
         ];
 
         if ( 'category' === $related_by ) {
@@ -196,11 +195,12 @@ class RelatedPostsBlockController {
 
         $query = new \WP_Query(
             [
-                'post_status' => 'publish',
-                'post_type'   => get_post_type( get_the_ID() ),
-                'post__in'    => $related_post_ids,
-                'orderby'     => $order_by,
-                'order'       => $order,
+                'post_status'         => 'publish',
+                'post_type'           => get_post_type( get_the_ID() ),
+                'post__in'            => $related_post_ids,
+                'orderby'             => $order_by,
+                'order'               => $order,
+                'ignore_sticky_posts' => $ignore_sticky_posts,
             ]
         ); 
 
