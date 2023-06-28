@@ -109,10 +109,10 @@ class RelatedPostsBlockController {
 
     protected function build_related_posts_query( $attributes, $content, $block ) {
 
-        $related_by          = $query_args['relatedBy'] ?? 'category';
-        $order_by            = $query_args['orderBy'] ?? 'post_date';
-        $order               = $query_args['order'] ?? 'DESC';
-        $ignore_sticky_posts = $query_args['ignoreStickyPosts'] ?? false;
+        $related_by          = $attributes['relatedBy'] ?? 'category';
+        $order_by            = $attributes['orderBy'] ?? 'post_date';
+        $order               = $attributes['order'] ?? 'DESC';
+        $ignore_sticky_posts = $attributes['ignoreStickyPosts'] ?? false;
 
         // Build the query args based on the block attributes.
 

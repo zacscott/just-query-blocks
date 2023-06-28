@@ -52,9 +52,10 @@ export default function edit( props ) {
 							label="Order By"
 							value={ orderBy }
 							options={ [
-								{ label: 'Published Date', value: 'post_date' },
-								{ label: 'Modified Date', value: 'post_modified' },
+								{ label: 'Published Date', value: 'date' },
+								{ label: 'Modified Date', value: 'modified' },
 								{ label: 'Comment Count', value: 'comment_count' },
+								{ label: 'Random', value: 'rand' },
 							] }
 							onChange={ value => setAttributes( { orderBy: value } ) }
 							__nextHasNoMarginBottom
@@ -68,7 +69,6 @@ export default function edit( props ) {
 							options={ [
 								{ label: 'Descending', value: 'DESC' },
 								{ label: 'Ascending', value: 'ASC' },
-								{ label: 'Random', value: 'RAND' },
 							] }
 							onChange={ value => setAttributes( { order: value } ) }
 							__nextHasNoMarginBottom

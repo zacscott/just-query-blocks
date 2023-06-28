@@ -61,13 +61,16 @@ function edit(props) {
     value: orderBy,
     options: [{
       label: 'Published Date',
-      value: 'post_date'
+      value: 'date'
     }, {
       label: 'Modified Date',
-      value: 'post_modified'
+      value: 'modified'
     }, {
       label: 'Comment Count',
       value: 'comment_count'
+    }, {
+      label: 'Random',
+      value: 'rand'
     }],
     onChange: value => setAttributes({
       orderBy: value
@@ -82,9 +85,6 @@ function edit(props) {
     }, {
       label: 'Ascending',
       value: 'ASC'
-    }, {
-      label: 'Random',
-      value: 'RAND'
     }],
     onChange: value => setAttributes({
       order: value
