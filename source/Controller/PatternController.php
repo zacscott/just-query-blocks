@@ -37,16 +37,6 @@ class PatternController {
         );
 
         register_block_pattern(
-            'just-query-blocks/query-posts-grid',
-            [
-                'title'       => __( 'Posts Grid', 'just-query-blocks' ),
-                'description' => __( 'Post query in a multiline grid of post tiles.', 'just-query-blocks' ),
-                'categories'  => [ 'featured', $pattern_category ],
-                'content'     => $this->render_pattern( 'query-posts-grid' ),
-            ]
-        );
-
-        register_block_pattern(
             'just-query-blocks/query-posts-list',
             [
                 'title'       => __( 'Posts List', 'just-query-blocks' ),
