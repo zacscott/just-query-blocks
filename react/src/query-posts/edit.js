@@ -3,6 +3,13 @@ import {
 	__
 } from '@wordpress/i18n';
 
+import apiFetch from '@wordpress/api-fetch';
+
+import { 
+	useState,
+	useEffect
+} from '@wordpress/element';
+
 import {
 	useBlockProps,
 	InnerBlocks, 
@@ -24,6 +31,93 @@ export default function edit( props ) {
 		setAttributes
     } = props;
 
+	// Load all categories for the category select from the REST API.
+	const [ categoryOptions, setCategoryOptions ] = useState( {} );
+	useEffect(
+		() => {
+			
+			const loadCategoryOptions = async () => {
+
+				await apiFetch( { path: '/wp/v2/categories' } ).then(
+					categories => {
+		
+						let categoryOptions = categories.map( category => {
+							return {
+								label: category.name,
+								value: category.id,	
+							};
+						} );
+		
+						setCategoryOptions( categoryOptions );
+
+					}
+				);
+			};
+
+			loadCategoryOptions();
+
+		},
+		[]
+	);
+
+	// Load all tags for the tag select from the REST API.
+	const [ tagOptions, setTagOptions ] = useState( {} );
+	useEffect(
+		() => {
+			
+			const loadTagOptions = async () => {
+
+				await apiFetch( { path: '/wp/v2/tags' } ).then(
+					tags => {
+		
+						let tagOptions = tags.map( tag => {
+							return {
+								label: tag.name,
+								value: tag.id,	
+							};
+						} );
+		
+						setTagOptions( tagOptions );
+
+					}
+				);
+			};
+
+			loadTagOptions();
+
+		},
+		[]
+	);
+
+	// Load all authors for the author select from the REST API.
+	const [ authorOptions, setAuthorOptions ] = useState( {} );
+	useEffect(
+		() => {
+			
+			const loadAuthorOptions = async () => {
+
+				await apiFetch( { path: '/wp/v2/users' } ).then(
+					users => {
+
+						let authorOptions = users.map( user => {
+							return {
+								label: user.name,
+								value: user.id,	
+							};
+						} );
+		
+						setAuthorOptions( authorOptions );
+
+					}
+				);
+			};
+
+			loadAuthorOptions();
+
+		},
+		[]
+	);
+
 	return (
 		<>
 
@@ -38,9 +132,7 @@ export default function edit( props ) {
 						<ComboboxControl
 							label="Category"
 							value={ category }
-							options={ [
-								{ label: 'Category', value: '123' },
-							] }
+							options={ categoryOptions }
 							onChange={ value => setAttributes( { category: value } ) }
 							__nextHasNoMarginBottom
 						/>
@@ -50,9 +142,7 @@ export default function edit( props ) {
 						<ComboboxControl
 							label="Tag"
 							value={ tag }
-							options={ [
-								{ label: 'Tag', value: '123' },
-							] }
+							options={ tagOptions }
 							onChange={ value => setAttributes( { tag: value } ) }
 							__nextHasNoMarginBottom
 						/>
@@ -62,9 +152,7 @@ export default function edit( props ) {
 						<ComboboxControl
 							label="Author"
 							value={ author }
-							options={ [
-								{ label: 'Author', value: '123' },
-							] }
+							options={ authorOptions }
 							onChange={ value => setAttributes( { author: value } ) }
 							__nextHasNoMarginBottom
 						/>

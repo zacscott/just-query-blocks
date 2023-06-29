@@ -87,7 +87,9 @@ class QueryBlocksController {
 
     public function build_query_posts_query( $attributes, $content, $block ) {
 
-        // TODO category etc.
+        $category            = $attributes['category'] ?? 0;
+        $tag                 = $attributes['tag'] ?? 0;
+        $author              = $attributes['author'] ?? 0;
         $order_by            = $attributes['orderBy'] ?? 'post_date';
         $order               = $attributes['order'] ?? 'DESC';
         $ignore_sticky_posts = $attributes['ignoreStickyPosts'] ?? false;
@@ -102,6 +104,18 @@ class QueryBlocksController {
             'orderby'             => $order_by,
             'order'               => $order,
         ];
+
+        if ( $category ) {
+            $query_args['cat'] = $category;
+        }
+
+        if ( $tag ) {
+            $query_args['tag_id'] = $tag;
+        }
+
+        if ( $author ) {
+            $query_args['author'] = $author;
+        }
 
         /**
          * Filter the query arguments for the related posts block.
