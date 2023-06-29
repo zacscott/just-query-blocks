@@ -36,9 +36,9 @@ class QueryBlocksController {
         );
     
         register_block_type(
-            JUST_QUERY_BLOCKS_PLUGIN_ABSPATH . '/react/build/related-posts-template',
+            JUST_QUERY_BLOCKS_PLUGIN_ABSPATH . '/react/build/post-template',
             [
-                'render_callback' => [ $this, 'render_related_posts_template_block' ],
+                'render_callback' => [ $this, 'render_post_template_block' ],
             ]
         );
 
@@ -78,13 +78,12 @@ class QueryBlocksController {
 
     }
 
-    public function render_related_posts_template_block( $attributes, $content, $block ) {
+    public function render_post_template_block( $attributes, $content, $block ) {
 
         $block_content = '';
 
         if ( $this->current_query && $this->current_query->have_posts() ) {
             $this->current_query->the_post();
-                    
 
             $dynamic_block_parsed = $block->parsed_block;
             $dynamic_block_parsed['blockName'] = 'core/null';

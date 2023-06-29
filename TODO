@@ -1,7 +1,6 @@
 
-- Rename to Just Posts Block
-- Rename Just Post Template
 - Add posts block which lets you select the posts query
     - Use Combobox & include the exitre taxonomy list by default as a phase 1
-- __() everything in React pls
+- __() everything in React
 - Add patterns for related posts& posts query block
+- README's

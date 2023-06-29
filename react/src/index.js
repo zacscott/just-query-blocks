@@ -1,3 +1,4 @@
 
+import 'query-posts/index'
 import 'related-posts/index'
-import 'related-posts-template/index'
+import 'post-template/index'
