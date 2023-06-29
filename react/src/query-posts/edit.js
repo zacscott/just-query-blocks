@@ -27,7 +27,7 @@ import './editor.scss';
 
 export default function edit( props ) {
 	const {
-        attributes: { category, tag, author, orderBy, order, ignoreStickyPosts },
+        attributes: { category, tag, author, orderBy, order, ignoreStickyPosts, preventDuplicates },
 		setAttributes
     } = props;
 
@@ -185,12 +185,21 @@ export default function edit( props ) {
 							__nextHasNoMarginBottom
 						/>
 					</PanelRow>
-
+					
 					<PanelRow>
 						<ToggleControl
 							label="Ignore sticky posts"
 							checked={ ignoreStickyPosts }
 							onChange={ value => { setAttributes( { ignoreStickyPosts: value } ) } }
+						/>
+					</PanelRow>
+
+					<PanelRow>
+						<ToggleControl
+							label="Prevent duplicates"
+							help="Prevent posts from appearing more than once in any of the query blocks on the page."
+							checked={ preventDuplicates }
+							onChange={ value => { setAttributes( { preventDuplicates: value } ) } }
 						/>
 					</PanelRow>
 

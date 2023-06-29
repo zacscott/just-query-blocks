@@ -20,6 +20,13 @@ class QueryBlocksController {
      */
     protected $current_query = null;
 
+    /**
+     * The IDs of all posts which have appeared in a query block to this point.
+     * 
+     * @var array
+     */
+    protected $all_queried_posts = [];
+
     public function __construct() {
 
         add_action( 'init', [ $this, 'register_blocks' ] );
@@ -93,6 +100,7 @@ class QueryBlocksController {
         $order_by            = $attributes['orderBy'] ?? 'post_date';
         $order               = $attributes['order'] ?? 'DESC';
         $ignore_sticky_posts = $attributes['ignoreStickyPosts'] ?? false;
+        $prevent_duplicates  = $attributes['preventDuplicates'] ?? false;
 
         // Build the query args based on the block attributes.
 
@@ -117,6 +125,10 @@ class QueryBlocksController {
             $query_args['author'] = $author;
         }
 
+        if ( $prevent_duplicates && ! empty( $this->all_queried_posts ) ) {
+            $query_args['post__not_in'] = array_merge( $query_args['post__not_in'], $this->all_queried_posts );
+        }
+
         /**
          * Filter the query arguments for the related posts block.
          * 
@@ -127,20 +139,24 @@ class QueryBlocksController {
         // Run the query and get the post IDs.
 
         $query_args['fields'] = 'ids';
-        $related_post_ids = get_posts( $query_args );
+        $queried_post_ids     = get_posts( $query_args );
 
         // If there isnt enough related posts, fallback to a wider query.
 
-        if ( count( $related_post_ids ) < $query_args['posts_per_page'] ) {
+        if ( count( $queried_post_ids ) < $query_args['posts_per_page'] ) {
 
-            $query_args['posts_per_page'] = $query_args['posts_per_page'] - count( $related_post_ids );
-            $query_args['post__not_in']   = array_merge( $query_args['post__not_in'], $related_post_ids );
+            $query_args['posts_per_page'] = $query_args['posts_per_page'] - count( $queried_post_ids );
+            $query_args['post__not_in']   = array_merge( $query_args['post__not_in'], $queried_post_ids );
 
             $extra_post_ids = get_posts( $query_args );
 
-            $related_post_ids = array_merge( $related_post_ids, $extra_post_ids );
+            $queried_post_ids = array_merge( $queried_post_ids, $extra_post_ids );
 
         }
+
+        // Keep track of the posts which have been queried so far.
+
+        $this->all_queried_posts = array_merge( $this->all_queried_posts, $queried_post_ids );
 
         // Build the final query to pull in the full posts.
 
@@ -148,7 +164,7 @@ class QueryBlocksController {
             [
                 'post_status'         => 'publish',
                 'post_type'           => get_post_type( get_the_ID() ),
-                'post__in'            => $related_post_ids,
+                'post__in'            => $queried_post_ids,
                 'orderby'             => $order_by,
                 'order'               => $order,
                 'ignore_sticky_posts' => $ignore_sticky_posts,
@@ -199,6 +215,7 @@ class QueryBlocksController {
         $order_by            = $attributes['orderBy'] ?? 'post_date';
         $order               = $attributes['order'] ?? 'DESC';
         $ignore_sticky_posts = $attributes['ignoreStickyPosts'] ?? false;
+        $prevent_duplicates  = $attributes['preventDuplicates'] ?? false;
 
         // Build the query args based on the block attributes.
 
@@ -248,6 +265,10 @@ class QueryBlocksController {
 
         }
 
+        if ( $prevent_duplicates && ! empty( $this->all_queried_posts ) ) {
+            $query_args['post__not_in'] = array_merge( $query_args['post__not_in'], $this->all_queried_posts );
+        }
+
         /**
          * Filter the query arguments for the related posts block.
          * 
@@ -276,6 +297,10 @@ class QueryBlocksController {
             $related_post_ids = array_merge( $related_post_ids, $extra_post_ids );
 
         }
+
+        // Keep track of the posts which have been queried so far.
+
+        $this->all_queried_posts = array_merge( $this->all_queried_posts, $related_post_ids );
 
         // Build the final query to pull in the full posts.
 
@@ -312,7 +337,7 @@ class QueryBlocksController {
                 ]
             );
 
-            $block_content = $dynamic_block->render( [ 'dynamic' => false ] );
+            $block_content = $dynamic_block->render( [ 'dynamic' => true ] );
 
         }
 

@@ -38,7 +38,8 @@ function edit(props) {
       author,
       orderBy,
       order,
-      ignoreStickyPosts
+      ignoreStickyPosts,
+      preventDuplicates
     },
     setAttributes
   } = props;
@@ -166,6 +167,15 @@ function edit(props) {
     onChange: value => {
       setAttributes({
         ignoreStickyPosts: value
+      });
+    }
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: "Prevent duplicates",
+    help: "Prevent posts from appearing more than once in any of the query blocks on the page.",
+    checked: preventDuplicates,
+    onChange: value => {
+      setAttributes({
+        preventDuplicates: value
       });
     }
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -317,7 +327,7 @@ module.exports = window["wp"]["i18n"];
   \************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-query-blocks/query-posts","version":"1.0.0","title":"Just Query Posts","category":"layout","icon":"controls-repeat","description":"Query posts.","textdomain":"just-query-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"category":{"type":"string"},"tag":{"type":"string"},"author":{"type":"string"},"orderBy":{"type":"string","default":"post_date"},"order":{"type":"string","default":"DESC"},"ignoreStickyPosts":{"type":"boolean","default":false}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-query-blocks/query-posts","version":"1.0.0","title":"Just Query Posts","category":"layout","icon":"controls-repeat","description":"Query posts.","textdomain":"just-query-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"category":{"type":"string"},"tag":{"type":"string"},"author":{"type":"string"},"orderBy":{"type":"string","default":"post_date"},"order":{"type":"string","default":"DESC"},"ignoreStickyPosts":{"type":"boolean","default":false},"preventDuplicates":{"type":"boolean","default":true}}}');
 
 /***/ })
 
