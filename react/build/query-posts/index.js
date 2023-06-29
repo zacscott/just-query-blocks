@@ -327,7 +327,7 @@ module.exports = window["wp"]["i18n"];
   \************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-query-blocks/query-posts","version":"1.0.0","title":"Just Query Posts","category":"layout","icon":"controls-repeat","description":"Query posts.","textdomain":"just-query-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"category":{"type":"string"},"tag":{"type":"string"},"author":{"type":"string"},"orderBy":{"type":"string","default":"post_date"},"order":{"type":"string","default":"DESC"},"ignoreStickyPosts":{"type":"boolean","default":false},"preventDuplicates":{"type":"boolean","default":true}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-query-blocks/query-posts","version":"1.0.0","title":"Just Query Posts","category":"layout","icon":"controls-repeat","description":"Query posts.","textdomain":"just-query-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"category":{"type":"number"},"tag":{"type":"number"},"author":{"type":"number"},"orderBy":{"type":"string","default":"post_date"},"order":{"type":"string","default":"DESC"},"ignoreStickyPosts":{"type":"boolean","default":false},"preventDuplicates":{"type":"boolean","default":true}}}');
 
 /***/ })
 

@@ -13,13 +13,13 @@
   "style": "file:./style-index.css",
   "attributes": {
     "category": {
-      "type": "string"
+      "type": "number"
     },
     "tag": {
-      "type": "string"
+      "type": "number"
     },
     "author": {
-      "type": "string"
+      "type": "number"
     },
     "orderBy": {
       "type": "string",
