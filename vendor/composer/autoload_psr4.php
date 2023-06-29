@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'JustRelatedPosts\\' => array($baseDir . '/source'),
+    'JustQueryBlocks\\' => array($baseDir . '/source'),
 );

@@ -1,16 +1,17 @@
 <?php
 
-namespace JustRelatedPosts\Controller;
+namespace JustQueryBlocks\Controller;
 
 /**
- * Responsible for registering and rendering the related posts block.
+ * Responsible for registering and rendering the post queries block.
  * 
- * @package JustRelatedPosts\Controller
+ * @package JustQueryBlocks\Controller
  */
-class RelatedPostsBlockController {
+class QueryBlocksController {
 
-    const RELATED_POSTS_BLOCK_NAME = 'just-related-posts/related-posts';
-    const RELATED_POSTS_TEMPLATE_BLOCK_NAME = 'just-related-posts/related-posts-template';
+    const QUERY_BLOCK_NAME = 'just-query-blocks/query-block';
+    const POST_TEMPLATE_BLOCK_NAME = 'just-query-blocks/post-template';
+    const RELATED_POSTS_BLOCK_NAME = 'just-query-blocks/related-posts';
 
     /**
      * The current query being rendered.
@@ -28,14 +29,14 @@ class RelatedPostsBlockController {
     public function register_blocks() {
 
         register_block_type(
-            JUST_RELATED_POSTS_PLUGIN_ABSPATH . '/react/build/related-posts',
+            JUST_QUERY_BLOCKS_PLUGIN_ABSPATH . '/react/build/related-posts',
             [
                 'render_callback' => [ $this, 'render_related_posts_block' ],
             ]
         );
     
         register_block_type(
-            JUST_RELATED_POSTS_PLUGIN_ABSPATH . '/react/build/related-posts-template',
+            JUST_QUERY_BLOCKS_PLUGIN_ABSPATH . '/react/build/related-posts-template',
             [
                 'render_callback' => [ $this, 'render_related_posts_template_block' ],
             ]
@@ -164,7 +165,7 @@ class RelatedPostsBlockController {
          * 
          * @param array $query_args The query arguments.
          */
-        $query_args = apply_filters( 'just_related_posts_block_query_args', $query_args );
+        $query_args = apply_filters( 'JUST_QUERY_BLOCKS_block_query_args', $query_args );
 
         // Run the query and get the post IDs.
 
@@ -223,7 +224,7 @@ class RelatedPostsBlockController {
                 $current = $inner_blocks->current();
 
                 // If the current post is a post template, increment the count.
-                if ( $current->name === self::RELATED_POSTS_TEMPLATE_BLOCK_NAME ) {
+                if ( $current->name === self::POST_TEMPLATE_BLOCK_NAME ) {
                     $count++;
                 }
 

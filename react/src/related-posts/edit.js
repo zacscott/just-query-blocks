@@ -12,7 +12,7 @@ import {
 import {
 	PanelBody,
 	PanelRow,
-	SelectControl,
+	ComboboxControl,
 	ToggleControl,
 } from '@wordpress/components';
 
@@ -34,7 +34,7 @@ export default function edit( props ) {
 					initialOpen={true}
 				>
 					<PanelRow>
-						<SelectControl
+						<ComboboxControl
 							label="Related By"
 							value={ relatedBy }
 							options={ [
@@ -48,7 +48,7 @@ export default function edit( props ) {
 					</PanelRow>
 
 					<PanelRow>
-						<SelectControl
+						<ComboboxControl
 							label="Order By"
 							value={ orderBy }
 							options={ [
@@ -63,7 +63,7 @@ export default function edit( props ) {
 					</PanelRow>
 
 					<PanelRow>
-						<SelectControl
+						<ComboboxControl
 							label="Order"
 							value={ order }
 							options={ [
