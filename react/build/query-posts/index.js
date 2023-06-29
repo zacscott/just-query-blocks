@@ -29,7 +29,9 @@ __webpack_require__.r(__webpack_exports__);
 function edit(props) {
   const {
     attributes: {
-      relatedBy,
+      category,
+      tag,
+      author,
       orderBy,
       order,
       ignoreStickyPosts
@@ -37,23 +39,39 @@ function edit(props) {
     setAttributes
   } = props;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Related By'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Query'),
     initialOpen: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
-    label: "Related By",
-    value: relatedBy,
+    label: "Category",
+    value: category,
     options: [{
       label: 'Category',
-      value: 'category'
-    }, {
-      label: 'Tag',
-      value: 'tag'
-    }, {
-      label: 'Author',
-      value: 'author'
+      value: '123'
     }],
     onChange: value => setAttributes({
-      relatedBy: value
+      category: value
+    }),
+    __nextHasNoMarginBottom: true
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
+    label: "Tag",
+    value: tag,
+    options: [{
+      label: 'Tag',
+      value: '123'
+    }],
+    onChange: value => setAttributes({
+      tag: value
+    }),
+    __nextHasNoMarginBottom: true
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
+    label: "Author",
+    value: author,
+    options: [{
+      label: 'Author',
+      value: '123'
+    }],
+    onChange: value => setAttributes({
+      author: value
     }),
     __nextHasNoMarginBottom: true
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ComboboxControl, {
@@ -237,7 +255,7 @@ module.exports = window["wp"]["i18n"];
   \************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-query-blocks/query-posts","version":"1.0.0","title":"Just Query Posts","category":"layout","icon":"controls-repeat","description":"Query posts.","textdomain":"just-query-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"relatedBy":{"type":"string","default":"category"},"orderBy":{"type":"string","default":"post_date"},"order":{"type":"string","default":"DESC"},"ignoreStickyPosts":{"type":"boolean","default":false}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"just-query-blocks/query-posts","version":"1.0.0","title":"Just Query Posts","category":"layout","icon":"controls-repeat","description":"Query posts.","textdomain":"just-query-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"category":{"type":"string"},"tag":{"type":"string"},"author":{"type":"string"},"orderBy":{"type":"string","default":"post_date"},"order":{"type":"string","default":"DESC"},"ignoreStickyPosts":{"type":"boolean","default":false}}}');
 
 /***/ })
 

@@ -12,9 +12,14 @@
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
   "attributes": {
-    "relatedBy": {
-      "type": "string",
-      "default": "category"
+    "category": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
     },
     "orderBy": {
       "type": "string",

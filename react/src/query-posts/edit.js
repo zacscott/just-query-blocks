@@ -20,7 +20,7 @@ import './editor.scss';
 
 export default function edit( props ) {
 	const {
-        attributes: { relatedBy, orderBy, order, ignoreStickyPosts },
+        attributes: { category, tag, author, orderBy, order, ignoreStickyPosts },
 		setAttributes
     } = props;
 
@@ -30,19 +30,42 @@ export default function edit( props ) {
 			<InspectorControls>
 
 				<PanelBody
-					title={ __( 'Related By' ) }
+					title={ __( 'Query' ) }
 					initialOpen={true}
 				>
+
 					<PanelRow>
 						<ComboboxControl
-							label="Related By"
-							value={ relatedBy }
+							label="Category"
+							value={ category }
 							options={ [
-								{ label: 'Category', value: 'category' },
-								{ label: 'Tag', value: 'tag' },
-								{ label: 'Author', value: 'author' },
+								{ label: 'Category', value: '123' },
 							] }
-							onChange={ value => setAttributes( { relatedBy: value } ) }
+							onChange={ value => setAttributes( { category: value } ) }
+							__nextHasNoMarginBottom
+						/>
+					</PanelRow>
+
+					<PanelRow>
+						<ComboboxControl
+							label="Tag"
+							value={ tag }
+							options={ [
+								{ label: 'Tag', value: '123' },
+							] }
+							onChange={ value => setAttributes( { tag: value } ) }
+							__nextHasNoMarginBottom
+						/>
+					</PanelRow>
+
+					<PanelRow>
+						<ComboboxControl
+							label="Author"
+							value={ author }
+							options={ [
+								{ label: 'Author', value: '123' },
+							] }
+							onChange={ value => setAttributes( { author: value } ) }
 							__nextHasNoMarginBottom
 						/>
 					</PanelRow>

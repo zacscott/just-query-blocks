@@ -29,6 +29,13 @@ class QueryBlocksController {
     public function register_blocks() {
 
         register_block_type(
+            JUST_QUERY_BLOCKS_PLUGIN_ABSPATH . '/react/build/query-posts',
+            [
+                'render_callback' => [ $this, 'render_query_posts_block' ],
+            ]
+        );
+
+        register_block_type(
             JUST_QUERY_BLOCKS_PLUGIN_ABSPATH . '/react/build/related-posts',
             [
                 'render_callback' => [ $this, 'render_related_posts_block' ],
@@ -41,6 +48,100 @@ class QueryBlocksController {
                 'render_callback' => [ $this, 'render_post_template_block' ],
             ]
         );
+
+    }
+
+    public function render_query_posts_block( $attributes, $content, $block ) {
+
+        $this->current_query = $this->build_query_posts_query( $attributes, $content, $block );
+
+        ob_start();
+        
+        if ( $this->current_query->have_posts() ) {
+    
+            $inner_blocks = $block->inner_blocks;
+            if ( $inner_blocks ) {
+    
+                while ( $inner_blocks->valid() ) {
+    
+                    $current = $inner_blocks->current();
+    
+                    echo $current->render();
+    
+                    $inner_blocks->next();
+    
+                }
+
+                $inner_blocks->rewind();
+    
+            }
+    
+        }
+    
+        wp_reset_postdata();
+        $this->current_query = null;
+    
+        return ob_get_clean();
+
+    }
+
+    public function build_query_posts_query( $attributes, $content, $block ) {
+
+        // TODO category etc.
+        $order_by            = $attributes['orderBy'] ?? 'post_date';
+        $order               = $attributes['order'] ?? 'DESC';
+        $ignore_sticky_posts = $attributes['ignoreStickyPosts'] ?? false;
+
+        // Build the query args based on the block attributes.
+
+        $query_args = [
+            'post_status'         => 'publish',
+            'post__not_in'        => [ get_the_ID() ],
+            'post_type'           => get_post_type( get_the_ID() ),
+            'posts_per_page'      => $this->count_post_templates( $block ),
+            'orderby'             => $order_by,
+            'order'               => $order,
+        ];
+
+        /**
+         * Filter the query arguments for the related posts block.
+         * 
+         * @param array $query_args The query arguments.
+         */
+        $query_args = apply_filters( 'just_query_posts_block_query_args', $query_args );
+
+        // Run the query and get the post IDs.
+
+        $query_args['fields'] = 'ids';
+        $related_post_ids = get_posts( $query_args );
+
+        // If there isnt enough related posts, fallback to a wider query.
+
+        if ( count( $related_post_ids ) < $query_args['posts_per_page'] ) {
+
+            $query_args['posts_per_page'] = $query_args['posts_per_page'] - count( $related_post_ids );
+            $query_args['post__not_in']   = array_merge( $query_args['post__not_in'], $related_post_ids );
+
+            $extra_post_ids = get_posts( $query_args );
+
+            $related_post_ids = array_merge( $related_post_ids, $extra_post_ids );
+
+        }
+
+        // Build the final query to pull in the full posts.
+
+        $query = new \WP_Query(
+            [
+                'post_status'         => 'publish',
+                'post_type'           => get_post_type( get_the_ID() ),
+                'post__in'            => $related_post_ids,
+                'orderby'             => $order_by,
+                'order'               => $order,
+                'ignore_sticky_posts' => $ignore_sticky_posts,
+            ]
+        ); 
+
+        return $query;
 
     }
 
@@ -75,32 +176,6 @@ class QueryBlocksController {
         $this->current_query = null;
     
         return ob_get_clean();
-
-    }
-
-    public function render_post_template_block( $attributes, $content, $block ) {
-
-        $block_content = '';
-
-        if ( $this->current_query && $this->current_query->have_posts() ) {
-            $this->current_query->the_post();
-
-            $dynamic_block_parsed = $block->parsed_block;
-            $dynamic_block_parsed['blockName'] = 'core/null';
-
-            $dynamic_block = new \WP_Block(
-                $dynamic_block_parsed,
-                [
-                    'postType' => get_post_type(),
-                    'postId'   => get_the_ID(),
-                ]
-            );
-
-            $block_content = $dynamic_block->render( [ 'dynamic' => false ] );
-
-        }
-
-        return $block_content;
 
     }
 
@@ -164,7 +239,7 @@ class QueryBlocksController {
          * 
          * @param array $query_args The query arguments.
          */
-        $query_args = apply_filters( 'JUST_QUERY_BLOCKS_block_query_args', $query_args );
+        $query_args = apply_filters( 'just_related_posts_block_query_args', $query_args );
 
         // Run the query and get the post IDs.
 
@@ -202,6 +277,32 @@ class QueryBlocksController {
         ); 
 
         return $query;
+
+    }
+
+    public function render_post_template_block( $attributes, $content, $block ) {
+
+        $block_content = '';
+
+        if ( $this->current_query && $this->current_query->have_posts() ) {
+            $this->current_query->the_post();
+
+            $dynamic_block_parsed = $block->parsed_block;
+            $dynamic_block_parsed['blockName'] = 'core/null';
+
+            $dynamic_block = new \WP_Block(
+                $dynamic_block_parsed,
+                [
+                    'postType' => get_post_type(),
+                    'postId'   => get_the_ID(),
+                ]
+            );
+
+            $block_content = $dynamic_block->render( [ 'dynamic' => false ] );
+
+        }
+
+        return $block_content;
 
     }
 
