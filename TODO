@@ -1,6 +1,5 @@
 
-- Add posts block which lets you select the posts query
-    - Use Combobox & include the exitre taxonomy list by default as a phase 1
+- Ensure there are no duplicate posts
 - __() everything in React
 - Add patterns for related posts& posts query block
 - README's

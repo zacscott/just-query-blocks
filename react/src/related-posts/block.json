@@ -27,6 +27,10 @@
 		"ignoreStickyPosts": {
 			"type": "boolean",
 			"default": false
+		},
+		"preventDuplicates": {
+			"type": "boolean",
+			"default": true
 		}
 	}
 }

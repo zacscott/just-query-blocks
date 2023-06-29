@@ -20,7 +20,7 @@ import './editor.scss';
 
 export default function edit( props ) {
 	const {
-        attributes: { relatedBy, orderBy, order, ignoreStickyPosts },
+        attributes: { relatedBy, orderBy, order, ignoreStickyPosts, preventDuplicates },
 		setAttributes
     } = props;
 
@@ -80,6 +80,15 @@ export default function edit( props ) {
 							label="Ignore sticky posts"
 							checked={ ignoreStickyPosts }
 							onChange={ value => { setAttributes( { ignoreStickyPosts: value } ) } }
+						/>
+					</PanelRow>
+
+					<PanelRow>
+						<ToggleControl
+							label="Prevent duplicates"
+							help="Prevent posts from appearing more than once in any of the query blocks on the page."
+							checked={ preventDuplicates }
+							onChange={ value => { setAttributes( { preventDuplicates: value } ) } }
 						/>
 					</PanelRow>
 
