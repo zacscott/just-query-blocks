@@ -15,9 +15,9 @@ Simple yet powerful post querying blocks designed for editorial teams to manage 
 Simple yet powerful post querying blocks designed for editorial teams to manage their publication homepage composition.
 Build a custom, dynamic powerful homepages entirely within Gutenberg.
 
-This block expands the query block built into WordPress to enable powerful page composition. Posts can be brought in by
-category, tag and author. prevernting duplicate posts from being displayed on the page. This is a vital feature missing
-from core WordPress.
+The query block expands the block built into WordPress to enable powerful page composition. Posts can be brought in by
+category, tag and author, prevernting duplicate posts from being displayed on the page (a vital feature missing
+from core WordPress).
 
 This plugin also includes a simple yet powerful related posts block, which lets you automatically bring in posts related by category, tag, author.
 
@@ -25,9 +25,9 @@ Take a look at the demo site for this plugin which has a basic homepage built us
 
 == Screenshots ==
 
-1. Query block options.
-2. Related posts block options.
-3. Built in post query patterns.
+1. Powerful query block.
+2. Related posts block.
+3. Built in block patterns.
 
 == Changelog ==
 
