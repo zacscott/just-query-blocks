@@ -15,3 +15,4 @@ define( 'JUST_QUERY_BLOCKS_PLUGIN_ABSURL', plugin_dir_url( __FILE__ )  );
 
 // Boot each of the plugin logic controllers.
 new \JustQueryBlocks\Controller\QueryBlocksController();
+new \JustQueryBlocks\Controller\PatternController();
