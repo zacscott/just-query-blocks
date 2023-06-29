@@ -107,7 +107,7 @@ class QueryBlocksController {
         $query_args = [
             'post_status'         => 'publish',
             'post__not_in'        => [ get_the_ID() ],
-            'post_type'           => get_post_type( get_the_ID() ),
+            'post_type'           => 'post',
             'posts_per_page'      => $this->count_post_templates( $block ),
             'orderby'             => $order_by,
             'order'               => $order,
@@ -163,7 +163,6 @@ class QueryBlocksController {
         $query = new \WP_Query(
             [
                 'post_status'         => 'publish',
-                'post_type'           => get_post_type( get_the_ID() ),
                 'post__in'            => $queried_post_ids,
                 'orderby'             => $order_by,
                 'order'               => $order,
