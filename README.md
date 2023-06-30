@@ -1,5 +1,5 @@
 
-# Just Query Posts
+# Just Query Posts - WordPress Plugin
 
 Simple yet powerful post querying blocks designed for editorial teams to manage their publication homepage composition.
 Build a custom, dynamic powerful homepages entirely within Gutenberg.
