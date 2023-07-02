@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Just Query Blocks
  * Description: Simple yet powerful post querying blocks designed for editorial teams to manage their publication homepage composition..
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Zac Scott
  * Author URI:  https://zacscott.net
  * Text Domain: just-query-blocks

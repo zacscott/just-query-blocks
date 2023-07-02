@@ -3,7 +3,7 @@ Contributors: zacscottau
 Tags: blocks
 Requires at least: 6.0
 Tested up to: 6.2.2
-Stable tag: 1.0
+Stable tag: 1.0.1
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -30,6 +30,9 @@ Take a look at the demo site for this plugin which has a basic homepage built us
 3. Built in block patterns.
 
 == Changelog ==
+
+= 1.0.1 =
+* Change plugin file.
 
 = 1.0 =
 * Initial release.
